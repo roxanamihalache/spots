@@ -25,13 +25,13 @@ public class Location {
     @ManyToOne
     private Location parent;
 
-    @Column
-    private Long type;
+    @Enumerated(EnumType.STRING)
+    private LocationType type;
 
     // default constructor for the sake of JPA :)
     protected Location() {}
 
-    public Location(String name, Location parent, Long type) {
+    public Location(String name, Location parent, LocationType type) {
         this.name = name;
         this.parent = parent;
         this.type = type;
@@ -61,11 +61,11 @@ public class Location {
         this.parent = parent;
     }
 
-    public Long getType() {
+    public LocationType getType() {
         return type;
     }
 
-    public void setType(Long type) {
+    public void setType(LocationType type) {
         this.type = type;
     }
 
