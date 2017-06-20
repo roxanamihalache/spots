@@ -82,7 +82,7 @@ public class SpotsApplication {
 
             Spot predealClimbing = new Spot("Predeal Climbing School", predeal,
                     df.parse("15/06/2017", ro), df.parse("15/10/2017", ro),
-                    new HashSet<>(Arrays.asList(Activity.CLIMB)));
+                    29.99, new HashSet<>(Arrays.asList(Activity.CLIMB)));
 
             List<Spot> spots = Arrays.asList(predealClimbing);
             spotRepository.save(spots);

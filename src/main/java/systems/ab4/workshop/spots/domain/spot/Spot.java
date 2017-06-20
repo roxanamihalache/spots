@@ -32,6 +32,9 @@ public class Spot {
     @Column
     @NotNull
     private Date endSeason;
+    @Column
+    @NotNull
+    private Double cost;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
@@ -64,12 +67,13 @@ public class Spot {
 
     protected Spot() {}
 
-    public Spot(String name, Location location, Date startSeason, Date endSeason, Set<Activity> activities){
+    public Spot(String name, Location location, Date startSeason, Date endSeason, Double cost, Set<Activity> activities){
         this.name = name;
         this.location = location;
         this.startSeason = startSeason;
         this.endSeason = endSeason;
         this.activities = activities;
+        this.cost = cost;
     }
 
     public Date getStartSeason() {
@@ -96,10 +100,18 @@ public class Spot {
         this.activities = activities;
     }
 
+    public Double getCost() {
+        return cost;
+    }
+
+    public void setCost(Double cost) {
+        this.cost = cost;
+    }
+
     @Override
     public String toString() {
         return String.format(
-                "Spot[id=%d, name='%s', location='%s', startSeason='%s', endSeason='%s', activities='%s' ]",
-                id, name, location, startSeason, endSeason, activities);
+                "Spot[id=%d, name='%s', location='%s', startSeason='%s', endSeason='%s', cost='%s', activities='%s' ]",
+                id, name, location, startSeason, endSeason, cost, activities);
     }
 }
