@@ -18,7 +18,6 @@ import java.util.List;
 public class SpotsApplication {
     private static final Logger log = LoggerFactory.getLogger(SpotsApplication.class);
 
-
     public static void main(String[] args) {
 		SpringApplication.run(SpotsApplication.class, args);
 	}
@@ -42,11 +41,12 @@ public class SpotsApplication {
             Location neptun = new Location("Neptun", constanta, LocationType.CITY);
             Location vama = new Location("Vama Veche", constanta, LocationType.CITY);
 
-            List<Location> locations = Arrays.asList(romania, ilfov, brasov, constanta, bucuresti, predeal, sinaia, mamaia, neptun, vama);
+            List<Location> locations = Arrays.asList(romania, ilfov, brasov, constanta, bucuresti, predeal,
+                    sinaia, mamaia, neptun, vama);
             // save whole lot :)
             locationRepository.save(locations);
 
-            // fetch all customers
+            // fetch all locations
             log.info("Locations found with findAll():");
             log.info("-------------------------------");
             for (Location location : locationRepository.findAll()) {
