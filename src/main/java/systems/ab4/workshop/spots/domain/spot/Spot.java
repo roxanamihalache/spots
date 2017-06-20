@@ -4,6 +4,8 @@ import systems.ab4.workshop.spots.domain.location.Location;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
+import java.util.Set;
 
 /**
  * @author Alexandru Artimon
@@ -23,6 +25,18 @@ public class Spot {
     @ManyToOne
     @NotNull
     private Location location;
+
+    @Column
+    @NotNull
+    private Date startSeason;
+    @Column
+    @NotNull
+    private Date endSeason;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    private Set<Activity> activities;
 
     public Long getId() {
         return id;
@@ -50,15 +64,42 @@ public class Spot {
 
     protected Spot() {}
 
-    public Spot(String name, Location location){
+    public Spot(String name, Location location, Date startSeason, Date endSeason, Set<Activity> activities){
         this.name = name;
         this.location = location;
+        this.startSeason = startSeason;
+        this.endSeason = endSeason;
+        this.activities = activities;
+    }
+
+    public Date getStartSeason() {
+        return startSeason;
+    }
+
+    public void setStartSeason(Date startSeason) {
+        this.startSeason = startSeason;
+    }
+
+    public Date getEndSeason() {
+        return endSeason;
+    }
+
+    public void setEndSeason(Date endSeason) {
+        this.endSeason = endSeason;
+    }
+
+    public Set<Activity> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(Set<Activity> activities) {
+        this.activities = activities;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Spot[id=%d, name='%s', location='%s']",
-                id, name, location);
+                "Spot[id=%d, name='%s', location='%s', startSeason='%s', endSeason='%s', activities='%s' ]",
+                id, name, location, startSeason, endSeason, activities);
     }
 }

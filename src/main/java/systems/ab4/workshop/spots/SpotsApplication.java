@@ -6,13 +6,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.format.datetime.DateFormatter;
 import systems.ab4.workshop.spots.domain.location.Location;
 import systems.ab4.workshop.spots.domain.location.LocationRepository;
 import systems.ab4.workshop.spots.domain.location.LocationType;
+import systems.ab4.workshop.spots.domain.spot.Activity;
+import systems.ab4.workshop.spots.domain.spot.Spot;
 import systems.ab4.workshop.spots.domain.spot.SpotRepository;
 
-import java.util.Arrays;
-import java.util.List;
+import java.text.DateFormat;
+import java.util.*;
 
 @SpringBootApplication
 public class SpotsApplication {
@@ -73,6 +76,20 @@ public class SpotsApplication {
                 log.info(location.toString());
             }
             log.info("");
+
+            DateFormatter df = new DateFormatter("dd/MM/yyyy");
+            Locale ro = Locale.forLanguageTag("ro");
+
+            Spot predealClimbing = new Spot("Predeal Climbing School", predeal,
+                    df.parse("15/06/2017", ro), df.parse("15/10/2017", ro),
+                    new HashSet<>(Arrays.asList(Activity.CLIMB)));
+
+            List<Spot> spots = Arrays.asList(predealClimbing);
+            spotRepository.save(spots);
+
+            log.info("Location found with findOne(1L):");
+            log.info("--------------------------------");
+            log.info(spotRepository.findOne(1L).toString());
         };
     }
 }
