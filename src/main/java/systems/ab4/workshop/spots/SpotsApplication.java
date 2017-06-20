@@ -59,6 +59,11 @@ public class SpotsApplication {
             log.info("Location found with findOne(1L):");
             log.info("--------------------------------");
             log.info(firstEverLocation.toString());
+            log.info("Children of location with id 1:");
+            log.info("--------------------------------");
+            for (Location child: firstEverLocation.getChildren()){
+                log.info(child.toString());
+            }
             log.info("");
 
             // fetch location by name
