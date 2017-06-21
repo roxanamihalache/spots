@@ -1,6 +1,7 @@
 package systems.ab4.workshop.spots.domain.location;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import systems.ab4.workshop.spots.domain.spot.Spot;
 
 import javax.persistence.*;
@@ -23,15 +24,18 @@ public class Location {
     @NotNull
     private String name;
 
+    @JsonIgnore
     @ManyToOne
     private Location parent;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER)
     private List<Location> children;
 
     @Enumerated(EnumType.STRING)
     private LocationType type;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "location")
     private List<Spot> spots;
 
